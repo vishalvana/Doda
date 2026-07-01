@@ -43,10 +43,10 @@ const jobSchema = new mongoose.Schema({
         required:true,
     },
     postedAt:{
-        type:date,
+        type: Date,
     },
     scrapedAt:{
-        type:date,
+        type: Date,
         default: Date.now,
     },
 },{

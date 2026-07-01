@@ -5,7 +5,7 @@ class JobRepository{
     }
 
     async findAll(){
-        return await job.find.sort({createdAt:-1});
+        return await job.find().sort({createdAt:-1});
     }
 
     async findById(id){

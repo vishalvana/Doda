@@ -1,5 +1,5 @@
-import jobRepository from "./job.repository";
-import ApiError from "../../utils/ApiError";
+import jobRepository from "./job.repository.js";
+import ApiError from "../../utils/ApiError.js";
 
 class jobService{
     async createJob(jobData){
