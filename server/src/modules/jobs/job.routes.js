@@ -8,7 +8,12 @@ router.post("/", jobController.createJob);
 
 router.get("/", jobController.getAllJobs);
 
+router.get("/count", jobController.getJobCount);
+
+
 router.get("/:id", jobController.getJobById);
+
+router.delete("/", jobController.deleteAllJobs);
 
 router.delete("/:id", jobController.deleteJob);
 

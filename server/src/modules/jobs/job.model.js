@@ -52,4 +52,13 @@ const jobSchema = new mongoose.Schema({
 },{
     timestamps: true,
 });
+jobSchema.index(
+  {
+    source: 1,
+    applyUrl: 1,
+  },
+  {
+    unique: true,
+  }
+);
 export default mongoose.model("job",jobSchema);

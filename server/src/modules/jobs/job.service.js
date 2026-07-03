@@ -31,6 +31,10 @@ class JobService {
         return job;
     }
 
+    async deleteAllJobs() {
+    return await jobRepository.deleteAll();
+}
+
     async deleteJob(id) {
 
         const job = await jobRepository.deleteById(id);
@@ -41,6 +45,9 @@ class JobService {
 
         return job;
     }
+    async getJobCount() {
+    return await jobRepository.count();
+}
 
 }
 

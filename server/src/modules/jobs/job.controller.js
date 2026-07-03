@@ -16,12 +16,12 @@ createJobs = asyncHandler(async (req, res) => {
     const jobs = await jobService.createJobs(req.body);
 
     res.status(201).json(
-        new ApiResponse(
-            201,
-            `${jobs.length} jobs inserted successfully`,
-            jobs
-        )
-    );
+    new ApiResponse(
+        201,
+        "Bulk upload completed",
+        jobs
+    )
+);
 
 });
   
@@ -49,6 +49,31 @@ createJobs = asyncHandler(async (req, res) => {
       new ApiResponse(200, "Job deleted successfully")
     );
   });
+  deleteAllJobs = asyncHandler(async (req, res) => {
+    const result = await jobService.deleteAllJobs();
+
+    res.status(200).json(
+        new ApiResponse(
+            200,
+            `${result.deletedCount} jobs deleted successfully`,
+            result
+        )
+    );
+});
+
+getJobCount = asyncHandler(async (req, res) => {
+
+    const count = await jobService.getJobCount();
+
+    res.status(200).json(
+        new ApiResponse(
+            200,
+            "Job count fetched successfully",
+            { count }
+        )
+    );
+
+});
 }
 
 export default new JobController();
