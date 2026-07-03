@@ -1,19 +1,16 @@
 import logger from "./utils/logger.js";
-import RemoteOKScraper from "./scrapers/remoteok/RemoteOKScraper.js";
-import jobApiAdapter from "./adapters/JobApiAdapters.js";
+import scraperManager from "./manager/ScraperManager.js";
 
 async function main() {
-  logger.info("DODA Scraper Started");
 
-  const scraper = new RemoteOKScraper();
+    logger.info("DODA Scraper Started");
 
-  const jobs = await scraper.scrape();
+    await scraperManager.run();
 
-  await jobApiAdapter.saveJobs(jobs);
+    logger.info("All scrapers finished.");
 
-  logger.info("Scraping completed successfully.");
 }
 
 main().catch((err) => {
-  logger.error(err);
+    logger.error(err);
 });

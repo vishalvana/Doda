@@ -3,9 +3,12 @@ import AbstractScraper from "../../core/AbstractScraper.js";
 import httpClient from "../../core/HttpClient.js";
 
 class RemoteOKScraper extends AbstractScraper {
+  
   constructor() {
-    super("RemoteOK");
-  }
+    super();
+
+    this.name = "RemoteOK";
+}
 
   async extract() {
     const response = await httpClient.get("https://remoteok.com/api");
