@@ -16,7 +16,14 @@ app.use(helmet());
 
 app.use(morgan("dev"));
 
-app.use(express.json());
+app.use(express.json({
+    limit: "20mb",
+}));
+
+app.use(express.urlencoded({
+    extended: true,
+    limit: "20mb",
+}));
 
 app.use("/api/v1", routes);
 

@@ -1,19 +1,29 @@
-import job from "./job.model.js";
-class JobRepository{
-    async create(jobData){
-        return await job.create(jobData);
+import Job from "./job.model.js";
+
+class JobRepository {
+
+    async create(jobData) {
+        return await Job.create(jobData);
     }
 
-    async findAll(){
-        return await job.find().sort({createdAt:-1});
+    async createMany(jobs) {
+        return await Job.insertMany(jobs, {
+            ordered: false
+        });
     }
 
-    async findById(id){
-        return await job.findById(id);
+    async findAll() {
+        return await Job.find().sort({ createdAt: -1 });
     }
-    async deleteById(id){
-        return await job.findByIdAndDelete(id);
+
+    async findById(id) {
+        return await Job.findById(id);
     }
+
+    async deleteById(id) {
+        return await Job.findByIdAndDelete(id);
+    }
+
 }
 
 export default new JobRepository();

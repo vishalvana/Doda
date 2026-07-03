@@ -10,6 +10,21 @@ class JobController {
       new ApiResponse(201, "Job created successfully", job)
     );
   });
+  
+createJobs = asyncHandler(async (req, res) => {
+
+    const jobs = await jobService.createJobs(req.body);
+
+    res.status(201).json(
+        new ApiResponse(
+            201,
+            `${jobs.length} jobs inserted successfully`,
+            jobs
+        )
+    );
+
+});
+  
 
   getAllJobs = asyncHandler(async (req, res) => {
     const jobs = await jobService.getAllJobs();

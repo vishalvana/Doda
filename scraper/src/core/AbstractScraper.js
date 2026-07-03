@@ -1,4 +1,3 @@
-import browserManager from "./BrowserManager.js";
 import logger from "../utils/logger.js";
 
 class AbstractScraper {
@@ -7,22 +6,17 @@ class AbstractScraper {
   }
 
   async scrape() {
-    let page;
-
     try {
       logger.info(`[${this.name}] Started`);
 
-     const jobs = await this.extract();
+      const jobs = await this.extract();
 
-      logger.info(
-        `[${this.name}] Found ${jobs.length} jobs`
-      );
+      logger.info(`[${this.name}] Found ${jobs.length} jobs`);
 
       return jobs;
-    } finally {
-      if (page) {
-        await page.close();
-      }
+    } catch (err) {
+      logger.error(err);
+      throw err;
     }
   }
 

@@ -2,6 +2,7 @@ import { Router } from "express";
 import jobController from "./job.controller.js";
 
 const router = Router();
+router.post("/bulk", jobController.createJobs);
 
 router.post("/", jobController.createJob);
 
