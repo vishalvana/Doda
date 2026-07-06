@@ -74,6 +74,22 @@ getJobCount = asyncHandler(async (req, res) => {
     );
 
 });
+
+
+
+bulkCreateJobs = asyncHandler(async (req, res) => {
+console.log(req.body);
+    const result = await jobService.bulkCreateJobs(req.body.jobs);
+
+    res.status(201).json(
+        new ApiResponse(
+            201,
+            "Bulk job upload completed",
+            result
+        )
+    );
+
+});
 }
 
 export default new JobController();

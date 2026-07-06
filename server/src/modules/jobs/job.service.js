@@ -48,6 +48,54 @@ class JobService {
     async getJobCount() {
     return await jobRepository.count();
 }
+async bulkCreateJobs(jobs) {
+
+    let inserted = 0;
+    let updated = 0;
+    let failed = 0;
+
+    for (const job of jobs) {
+
+        try {
+
+            const existingJob = await jobRepository.findBySourceUrl(job.sourceUrl);
+
+            if (existingJob) {
+
+                await jobRepository.update(existingJob._id, {
+                    ...job,
+                    status: "ACTIVE",
+                    lastSeenAt: new Date()
+                });
+
+                updated++;
+
+            } else {
+
+                await jobRepository.create({
+                    ...job,
+                    lastSeenAt: new Date()
+                });
+
+                inserted++;
+
+            }
+
+        } catch (error) {
+
+            failed++;
+
+        }
+
+    }
+
+    return {
+        inserted,
+        updated,
+        failed
+    };
+
+}
 
 }
 

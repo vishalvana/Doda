@@ -61,6 +61,24 @@ class JobRepository {
   }
 }
 
+async findBySourceUrl(sourceUrl) {
+    return await Job.findOne({ sourceUrl });
+}
+
+async update(id, jobData) {
+    return await Job.findByIdAndUpdate(
+        id,
+        jobData,
+        {
+            new: true
+        }
+    );
+}
+
+async bulkCreate(jobs) {
+    return await Job.insertMany(jobs);
+}
+
 async count() {
     return await Job.countDocuments();
 }

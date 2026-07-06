@@ -49,16 +49,42 @@ const jobSchema = new mongoose.Schema({
         type: Date,
         default: Date.now,
     },
+    sourceJobId: {
+  type: String,
+  default: null,
+},
+
+sourceUrl: {
+  type: String,
+  required: true,
+  unique: true,
+},
+
+status: {
+  type: String,
+  enum: ["ACTIVE", "EXPIRED"],
+  default: "ACTIVE",
+},
+
+lastSeenAt: {
+  type: Date,
+  default: Date.now,
+},
 },{
     timestamps: true,
 });
-jobSchema.index(
-  {
-    source: 1,
-    applyUrl: 1,
-  },
-  {
-    unique: true,
-  }
-);
+jobSchema.index({
+  title: "text",
+  company: "text",
+  description: "text",
+});
+
+jobSchema.index({
+  status: 1,
+  createdAt: -1,
+});
+
+jobSchema.index({
+  source: 1,
+});
 export default mongoose.model("job",jobSchema);
